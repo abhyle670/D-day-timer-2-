@@ -1,0 +1,79 @@
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:900">
+    <title>D-Day Widget</title>
+    <style>
+        body {
+            background-color: transparent; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .widget-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 40px;
+            border-radius: 12px;
+            background: #FCF9EC; 
+        }
+
+        .numbers {
+            font-family: 'Montserrat', sans-serif;
+            color: #4A3320;
+            font-size: 4.5em;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .label {
+            font-family: 'Lato', 'Malgun Gothic', sans-serif; 
+            color: #C08A3F; 
+            font-size: 1.2em;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="timer">
+    <div class="widget-container"> 
+        <div id="d-day-number" class="numbers">D-0</div>
+        <div class="label">전산세무 1급</div>
+    </div> 
+</div>
+
+<script>
+    const targetDate = new Date('oct 3, 2026 00:00:00').getTime();
+
+    let timer = setInterval(function() {
+        const today = new Date().getTime();
+        const diff = targetDate - today;
+        
+        let days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+        let dDayText = "";
+        
+        // D-, D-DAY, D+ 로직 
+        if (days > 0) {
+            dDayText = "D-" + days;
+        } else if (days === 0) {
+            dDayText = "D-DAY";
+        } else {
+            dDayText = "D+" + Math.abs(days);
+        }
+
+        document.getElementById("d-day-number").innerText = dDayText;
+    }, 1000); 
+</script>
+</body>
+</html>
