@@ -21,36 +21,36 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* 배경 크기 */
-            padding: 20px 30px; 
+            /* 위젯이 화면 폭에 맞춰 유연하게 변하도록 가로 폭을 80%로 설정 */
+            width: 80%;
+            max-width: 400px; /* 너무 무한정 커지지 않도록 최대폭 제한 */
+            padding: 5% 5%; 
             border-radius: 12px;
             /* 박스 배경색 */
             background: #FCF9EC; 
         }
 
         .numbers {
-            /* 숫자 폰트 종류 */
             font-family: 'Montserrat', sans-serif;
-            /* 숫자 폰트 색상 */
             color: #4A3320;
-            /* 숫자 크기 */
-            font-size: 1.7em; 
+            
+            /* 👇 핵심 변경 부분: 배경 폭에 따라 폰트 크기 자동 조절 */
+            /* clamp(최소크기, 화면비례크기, 최대크기) */
+            font-size: clamp(2.5em, 12vw, 5em); 
+            
             font-weight: 900;
             margin-bottom: 5px;
-            
-            /* 👇 숫자 자간 (글자 간격) 추가! 넓히려면 양수, 좁히려면 음수를 넣으세요 */
-            letter-spacing: 5.8px; 
+            letter-spacing: 5px; 
         }
 
         .label {
-            /* 하단 문구 폰트 종류 */
             font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; 
-            /* 하단 문구 폰트 색상 */
             color: #C08A3F; 
-            /* 하단 문구 크기 */
-            font-size: 0.5em; 
+            
+            /* 하단 문구도 폭에 맞춰 살짝씩 변하게 하려면 아래처럼 적용 */
+            font-size: clamp(0.8em, 4vw, 1.2em); 
+            
             font-weight: 700;
-            /* 하단 문구 자간 */
             letter-spacing: 2px;
         }
     </style>
@@ -66,7 +66,6 @@
 </div>
 
 <script>
-    // 목표 날짜 설정하는 곳
     const targetDate = new Date('Oct 3, 2026 00:00:00').getTime();
 
     let timer = setInterval(function() {
